@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Lora:wght@500&family=Outfit:wght@600&family=Poppins:wght@800&display=swap" rel="stylesheet">
+    <style>
+        .desktop-15,
+        .desktop-15 * {
+          box-sizing: border-box;
+        }
+        .desktop-15 {
+          background: #e9fed4;
+          height: 2320px;
+          position: relative;
+          overflow: hidden;
+        }
+        
+        /* FOOTER STYLES */
+        .rectangle-140 {
+          background: rgba(7, 34, 1, 0.95);
+          width: 1760px;
+          height: 212px;
+          position: absolute;
+          left: -5px;
+          top: 2096px;
+        }
+        
+        /* HERO IMAGE STYLES */
+        .rectangle-1402 {
+          width: 1750px;
+          height: 525px;
+          position: absolute;
+          left: 0px;
+          top: 180px;
+          box-shadow: 0px 4px 6px 0px rgba(0.25, 0.25, 0.25, 0.25);
+          object-fit: cover;
+        }
+        
+        /* HEADER BAR (Navigation bar) */
+        .rectangle-157 {
+          background: #072201;
+          width: 1505px;
+          height: 91px;
+          position: absolute;
+          left: 0px;
+          top: 0px;
+        }
+        
+        /* Navigation Elements */
+        .baryo-tap {
+          color: #fff8f8;
+          text-align: center;
+          font-family: "Poppins-ExtraBold", sans-serif;
+          font-size: 28px;
+          font-weight: 800;
+          position: absolute;
+          left: 109px;
+          top: 25px;
+        }
+        .sign-in {
+          color: #fff8f8;
+          text-align: center;
+          font-family: "Poppins-ExtraBold", sans-serif;
+          font-size: 24px;
+          font-weight: 800;
+          position: absolute;
+          left: 1120px;
+          top: 32px;
+        }
+        .sign-up {
+          color: #fff8f8;
+          text-align: center;
+          font-family: "Poppins-ExtraBold", sans-serif;
+          font-size: 24px;
+          font-weight: 800;
+          position: absolute;
+          left: 1291px;
+          top: 32px;
+        }
+        .about {
+          color: #fff8f8;
+          text-align: center;
+          font-family: "Poppins-ExtraBold", sans-serif;
+          font-size: 24px;
+          font-weight: 800;
+          position: absolute;
+          left: 953px;
+          top: 32px;
+        }
+        
+        /* Logo Circle and Image */
+        .ellipse-26 {
+          background: #ffffff;
+          border-radius: 50%;
+          width: 67px;
+          height: 67px;
+          position: absolute;
+          left: 21px;
+          top: 13px;
+        }
+        .social-responsibility-1 {
+          width: 74px;
+          height: 74px;
+          position: absolute;
+          left: 18px;
+          top: 11px;
+          object-fit: cover;
+          aspect-ratio: 1;
+        }
+        
+        /* 🟢 FIX 2: Corrected Lora Font family name */
+        .welcome-to-baryo-tap-we-re-here-to-make-communication-between-residents-and-barangay-officials-easier-and-faster-with-just-a-few-taps-you-can-report-local-issues-stay-updated-on-announcements-and-check-vegetable-prices-all-in-one-simple-app-our-goal-is-to-help-build-a-more-connected-transparent-and-active-community-where-everyone-has-a-voice-and-every-concern-matters {
+          color: #000000;
+          text-align: justify;
+          /* Changed "Lora-Regular" to the correct family name "Lora" */
+          font-family: "Lora", serif; 
+          font-size: 26px;
+          font-weight: 500;
+          position: absolute;
+          left: 773px;         
+          top: 260px;
+          width: 723px;
+          height: 624px;
+        }
+        
+        /* FOOTER DETAILS */
+        /* I consolidated the two `.baryo-tap2` declarations, assuming the one at the top is meant for the footer */
+        .baryo-tap2 {
+          color: #ffffff;
+          text-align: left;
+          font-family: "Poppins-ExtraBold", sans-serif;
+          font-size: 16px;
+          font-weight: 800;
+          position: absolute;
+          left: 109px;
+          top: 2139px;
+        }
+        .submit-report-complaint {
+          color: #ffffff;
+          text-align: justified;
+          font-family: "Inter-Medium", sans-serif;
+          font-size: 13px;
+          font-weight: 500;
+          position: absolute;
+          left: 450px;
+          top: 2183px;
+        }
+        .ellipse-20 {
+          background: #ffffff;
+          border-radius: 50%;
+          width: 67px;
+          height: 67px;
+          position: absolute;
+          left: 32px;
+          top: 2117px;
+        }
+        .services {
+          color: #ffffff;
+          text-align: left;
+          font-family: "Poppins-ExtraBold", sans-serif;
+          font-size: 16px;
+          font-weight: 800;
+          position: absolute;
+          left: 818px;
+          top: 2139px;
+        }
+        .explore {
+          color: #ffffff;
+          text-align: left;
+          font-family: "Poppins-ExtraBold", sans-serif;
+          font-size: 16px;
+          font-weight: 800;
+          position: absolute;
+          left: 450px;
+          top: 2139px;
+        }
+        .contact-us {
+          color: #ffffff;
+          text-align: left;
+          font-family: "Poppins-ExtraBold", sans-serif;
+          font-size: 16px;
+          font-weight: 800;
+          position: absolute;
+          left: 1224px;
+          top: 2139px;
+        }
+        .social-responsibility-2 {
+          width: 55px;
+          height: 55px;
+          position: absolute;
+          left: 38px;
+          top: 2123px;
+          object-fit: cover;
+          aspect-ratio: 1;
+        }
+        .a-digital-barangay-service-portal-designed-requests-and-market-price-monitoring-faster-transparent-and-more-accessible-to-all-residents-of-mantalongon-dalaguete-cebu {
+          color: #ffffff;
+          text-align: justified;
+          font-family: "Inter-Medium", sans-serif;
+          font-size: 13px;
+          font-weight: 500;
+          position: absolute;
+          left: 38px;
+          top: 2187px;
+          width: 264px;
+        }
+        .indigency-certificate-request {
+          color: #ffffff;
+          text-align: justified;
+          font-family: "Inter-Medium", sans-serif;
+          font-size: 13px;
+          font-weight: 500;
+          position: absolute;
+          left: 818px;
+          top: 2183px;
+        }
+        .request-barangay-documents {
+          color: #ffffff;
+          text-align: justified;
+          font-family: "Inter-Medium", sans-serif;
+          font-size: 13px;
+          font-weight: 500;
+          position: absolute;
+          left: 450px;
+          top: 2202px;
+        }
+        .market-price-analytics {
+          color: #ffffff;
+          text-align: justified;
+          font-family: "Inter-Medium", sans-serif;
+          font-size: 13px;
+          font-weight: 500;
+          position: absolute;
+          left: 450px;
+          top: 2222px;
+        }
+        .announcement-and-updates {
+          color: #ffffff;
+          text-align: justified;
+          font-family: "Inter-Medium", sans-serif;
+          font-size: 13px;
+          font-weight: 500;
+          position: absolute;
+          left: 450px;
+          top: 2242px;
+        }
+        .resident-support-desk {
+          color: #ffffff;
+          text-align: justified;
+          font-family: "Inter-Medium", sans-serif;
+          font-size: 13px;
+          font-weight: 500;
+          position: absolute;
+          left: 450px;
+          top: 2263px;
+        }
+        .baryotap-gmail-com {
+          color: #ffffff;
+          text-align: justified;
+          font-family: "Inter-Medium", sans-serif;
+          font-size: 13px;
+          font-weight: 500;
+          position: absolute;
+          left: 1248px;
+          top: 2217px;
+        }
+        .mantalongon-dalaguete-cebu {
+          color: #ffffff;
+          text-align: justified;
+          font-family: "Inter-Medium", sans-serif;
+          font-size: 13px;
+          font-weight: 500;
+          position: absolute;
+          left: 1244px;
+          top: 2183px;
+        }
+        .barangay-clearance-request {
+          color: #ffffff;
+          text-align: justified;
+          font-family: "Inter-Medium", sans-serif;
+          font-size: 13px;
+          font-weight: 500;
+          position: absolute;
+          left: 818px;
+          top: 2202px;
+        }
+        .business-permit-assistance {
+          color: #ffffff;
+          text-align: justified;
+          font-family: "Inter-Medium", sans-serif;
+          font-size: 13px;
+          font-weight: 500;
+          position: absolute;
+          left: 818px;
+          top: 2222px;
+        }
+        .community-concern-tracking {
+          color: #ffffff;
+          text-align: justified;
+          font-family: "Inter-Medium", sans-serif;
+          font-size: 13px;
+          font-weight: 500;
+          position: absolute;
+          left: 818px;
+          top: 2242px;
+        }
+        ._09511312976 {
+          color: #ffffff;
+          text-align: justified;
+          font-family: "Inter-Medium", sans-serif;
+          font-size: 13px;
+          font-weight: 500;
+          position: absolute;
+          left: 1248px;
+          top: 2247px;
+        }
+        .location-2-1 {
+          width: 20px;
+          height: 20px;
+          position: absolute;
+          left: 1224px;
+          top: 2183px;
+          object-fit: cover;
+          aspect-ratio: 1;
+        }
+        .mail-1 {
+          width: 20px;
+          height: 20px;
+          position: absolute;
+          left: 1224px;
+          top: 2213px;
+          object-fit: cover;
+          aspect-ratio: 1;
+        }
+        .telephone-1-7 {
+          width: 20px;
+          height: 20px;
+          position: absolute;
+          left: 1224px;
+          top: 2243px;
+          object-fit: cover;
+          aspect-ratio: 1;
+        }
+        
+        /* MISSION/VISION STYLES */
+        .our-mission {
+          color: #072201;
+          text-align: left;
+          font-family: "Poppins-ExtraBold", sans-serif;
+          font-size: 32px;
+          font-weight: 800;
+          position: absolute;
+          left: 612px;
+          top: 804px;
+        }
+        .our-vision {
+          color: #072201;
+          text-align: left;
+          font-family: "Poppins-ExtraBold", sans-serif;
+          font-size: 32px;
+          font-weight: 800;
+          position: absolute;
+          left: 622px;
+          top: 1043px;
+        }
+        .rectangle-150 {
+          border-radius: 10px;
+          width: 1229px;
+          height: 116px;
+          position: absolute;
+          left: 118px;
+          top: 887px;
+          box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.25);
+          object-fit: cover;
+        }
+        .rectangle-151 {
+          border-radius: 10px;
+          width: 1229px;
+          height: 116px;
+          position: absolute;
+          left: 118px;
+          top: 1125px;
+          box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.25);
+          object-fit: cover;
+        }
+        .to-provide-accessible-and-efficient-digital-services-that-strengthen-community-engagement-and-improve-local-governance {
+          color: #000000;
+          text-align: center;
+          font-family: "Lora", serif;
+          font-size: 26px;
+          font-weight: 500;
+          position: absolute;
+          left: 146px;
+          top: 923px;
+        }
+        .to-be-a-leading-community-service-platform-that-empowers-residents-through-digital-innovation {
+          color: #000000;
+          text-align: center;
+         font-family: "Lora", serif;
+          font-size: 26px;
+          font-weight: 500;
+          position: absolute;
+          left: 146px;
+          top: 1165px;
+        }
+        
+        /* TEAM STYLES */
+        .our-team {
+          color: #072201;
+          text-align: left;
+          font-family: "Poppins-ExtraBold", sans-serif;
+          font-size: 32px;
+          font-weight: 800;
+          position: absolute;
+          left: 639px;
+          top: 1273px;
+        }
+        /* Team Member 1 */
+        .rectangle-152 {
+          background: #c5fcb2;
+          border-radius: 10px;
+          width: 300px;
+          height: 275px;
+          position: absolute;
+          left: 131px;
+          top: 1373px;
+          box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.25);
+        }
+        .ellipse-21 {
+          border-radius: 50%;
+          border-style: solid;
+          border-color: #144d09;
+          border-width: 1px;
+          width: 140px;
+          height: 140px;
+          position: absolute;
+          left: 207px;
+          top: 1393px;
+          object-fit: cover;
+        }
+        .jenisel-ann-car-oza {
+          color: #144d09;
+          text-align: center;
+          font-family: "Lora", serif; 
+          font-size: 24px;
+          font-weight: 600;
+          position: absolute;
+          left: 95px;
+          top: 1558px;
+          width: 377px;
+          height: 28px;
+        }
+        .back-end-developer {
+          color: #072201;
+          text-align: left;
+          font-family: "Poppins-ExtraBold", sans-serif;
+          font-size: 20px;
+          font-weight: 800;
+          position: absolute;
+          left: 153px;
+          top: 1592px;
+        }
+        /* Team Member 2 */
+        .rectangle-153 {
+          background: #c5fcb2;
+          border-radius: 10px;
+          width: 300px;
+          height: 275px;
+          position: absolute;
+          left: 599px;
+          top: 1373px;
+          box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.25);
+        }
+        .ellipse-22 {
+          border-radius: 50%;
+          border-style: solid;
+          border-color: #144d09;
+          border-width: 1px;
+          width: 140px;
+          height: 140px;
+          position: absolute;
+          left: 675px;
+          top: 1393px;
+          object-fit: cover;
+        }
+        .marc-calvo {
+          color: #144d09;
+          text-align: center;
+          font-family: "Lora", serif; 
+          font-size: 24px;
+          font-weight: 600;
+          position: absolute;
+          left: 563px;
+          top: 1558px;
+          width: 377px;
+          height: 28px;
+        }
+        .database-designer {
+          color: #072201;
+          text-align: left;
+          font-family: "Poppins-ExtraBold", sans-serif;
+          font-size: 20px;
+          font-weight: 800;
+          position: absolute;
+          left: 631px;
+          top: 1592px;
+        }
+        /* Team Member 3 */
+        .rectangle-154 {
+          background: #c5fcb2;
+          border-radius: 10px;
+          width: 300px;
+          height: 275px;
+          position: absolute;
+          left: 366px;
+          top: 1742px;
+          box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.25);
+        }
+        .ellipse-23 {
+          border-radius: 50%;
+          border-style: solid;
+          border-color: #144d09;
+          border-width: 1px;
+          width: 140px;
+          height: 140px;
+          position: absolute;
+          left: 447px;
+          top: 1762px;
+          object-fit: cover;
+        }
+        .cheryl-jane-geoman {
+          color: #144d09;
+          text-align: center;
+          font-family: "Lora", serif; 
+          font-size: 24px;
+          font-weight: 600;
+          position: absolute;
+          left: 325px;
+          top: 1927px;
+          width: 377px;
+          height: 28px;
+        }
+        .front-end-developer {
+          color: #072201;
+          text-align: left;
+          font-family: "Poppins-ExtraBold", sans-serif;
+          font-size: 18px;
+          font-weight: 800;
+          position: absolute;
+          left: 391px;
+          top: 1961px;
+        }
+        /* Team Member 4 */
+        .rectangle-155 {
+          background: #c5fcb2;
+          border-radius: 10px;
+          width: 300px;
+          height: 275px;
+          position: absolute;
+          left: 769px;
+          top: 1742px;
+          box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.25);
+        }
+        .ellipse-24 {
+          border-radius: 50%;
+          border-style: solid;
+          border-color: #144d09;
+          border-width: 1px;
+          width: 140px;
+          height: 140px;
+          position: absolute;
+          left: 845px;
+          top: 1762px;
+          object-fit: cover;
+        }
+        .kharen-revillas {
+          color: #144d09;
+          text-align: center;
+          font-family: "Lora", serif; 
+          font-size: 24px;
+          font-weight: 600;
+          position: absolute;
+          left: 733px;
+          top: 1927px;
+          width: 377px;
+          height: 28px;
+        }
+        .front-end-developer2 {
+          color: #072201;
+          text-align: left;
+          font-family: "Poppins-ExtraBold", sans-serif;
+          font-size: 20px;
+          font-weight: 800;
+          position: absolute;
+          left: 786px;
+          top: 1961px;
+        }
+        /* Team Member 5 */
+        .rectangle-156 {
+          background: #c5fcb2;
+          border-radius: 10px;
+          width: 300px;
+          height: 275px;
+          position: absolute;
+          left: 1056px;
+          top: 1373px;
+          box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.25);
+        }
+        .ellipse-25 {
+          border-radius: 50%;
+          border-style: solid;
+          border-color: #144d09;
+          border-width: 1px;
+          width: 140px;
+          height: 140px;
+          position: absolute;
+          left: 1132px;
+          top: 1393px;
+          object-fit: cover;
+        }
+        .jessel-bustamante {
+          color: #144d09;
+          text-align: center;
+          font-family: "Lora", serif; 
+          font-size: 24px;
+          font-weight: 600;
+          position: absolute;
+          left: 1015px;
+          top: 1558px;
+          width: 377px;
+          height: 28px;
+        }
+        .back-end-developer2 {
+          color: #072201;
+          text-align: left;
+          font-family: "Poppins-ExtraBold", sans-serif;
+          font-size: 20px;
+          font-weight: 800;
+          position: absolute;
+          left: 1078px;
+          top: 1592px;
+        }
+    </style>
+</head>
+<body>
+<div class="desktop-15">
+    
+    <img class="rectangle-1402" src="image/about.png" alt="About Page Background" />
+    
+    <div class="rectangle-157"></div>
+    <div class="ellipse-26"></div>
+    <a href="landing.php">
+        <img class="social-responsibility-1" src="image/social-responsibility 1 (1).png" alt="Logo" />
+    </a>
+    
+    <div class="baryo-tap"><a href="landing.php" style="text-decoration: none; color: inherit;">Baryo Tap</a></div>
+    
+    <div class="sign-in"><a href="dlogin.html" style="text-decoration: none; color: inherit;">Sign in</a></div>
+<div class="sign-up"><a href="dsignup.html" style="text-decoration: none; color: inherit;">Sign up</a></div>
+
+
+    <div class="about">About</div>
+    
+    <div
+      class="welcome-to-baryo-tap-we-re-here-to-make-communication-between-residents-and-barangay-officials-easier-and-faster-with-just-a-few-taps-you-can-report-local-issues-stay-updated-on-announcements-and-check-vegetable-prices-all-in-one-simple-app-our-goal-is-to-help-build-a-more-connected-transparent-and-active-community-where-everyone-has-a-voice-and-every-concern-matters"
+    >
+      Welcome to Baryo Tap! We’re here to make communication between residents and
+      barangay officials easier and faster. With just a few taps, you can report
+      local issues, stay updated on announcements, and check vegetable prices —
+      all in one simple app!
+      <br />
+      Our goal is to help build a more connected, transparent, and active
+      community where everyone has a voice and every concern matters.
+    </div>
+    
+    <div class="our-mission">OUR MISSION</div>
+    <img class="rectangle-150" src="image/Blue Modern Business Facebook Cover (4).png" alt="Mission Box" />
+    <div
+      class="to-provide-accessible-and-efficient-digital-services-that-strengthen-community-engagement-and-improve-local-governance"
+    >
+      To provide accessible and efficient digital services that strengthen
+      community engagement and
+      <br />
+      improve local governance.
+    </div>
+    
+    <div class="our-vision">OUR VISION</div>
+    <img class="rectangle-151" src="image/Blue Modern Business Facebook Cover (4).png" alt="Vision Box" />
+    <div
+      class="to-be-a-leading-community-service-platform-that-empowers-residents-through-digital-innovation"
+    >
+      To be a leading community service platform that empowers residents through
+      digital innovation.
+    </div>
+    
+    <div class="our-team">OUR TEAM</div>
+    
+    <div class="rectangle-152"></div>
+    <img class="ellipse-21" src="image/mayor.png" alt="Jenisel Ann Carñoza" />
+    <div class="jenisel-ann-car-oza">JENISEL ANN CARÑOZA</div>
+    <div class="back-end-developer">BACK END DEVELOPER</div>
+    
+    <div class="rectangle-153"></div>
+    <img class="ellipse-22" src="image/marc.jpg" alt="Marc Calvo" />
+    <div class="marc-calvo">MARC CALVO</div>
+    <div class="database-designer">DATABASE DESIGNER</div>
+    
+    <div class="rectangle-154"></div>
+    <img class="ellipse-23" src="image/0a79fb93-911d-4960-81ab-23adab0223cb.jpg" alt="Cheryl Jane Geoman" />
+    <div class="cheryl-jane-geoman">CHERYL JANE GEOMAN</div>
+    <div class="front-end-developer">FRONT END DEVELOPER <br>& DATABASE DESIGNER</div>
+    
+    <div class="rectangle-155"></div>
+    <img class="ellipse-24" src="image/kharen.jpg" alt="Kharen Revillas" />
+    <div class="kharen-revillas">KHAREN REVILLAS</div>
+    <div class="front-end-developer2">FRONT END DEVELOPER</div>
+    
+    <div class="rectangle-156"></div>
+    <img class="ellipse-25" src="image/jessel.jpg" alt="Jessel Bustamante" />
+    <div class="jessel-bustamante">JESSEL BUSTAMANTE</div>
+    <div class="back-end-developer2">BACK END DEVELOPER</div>
+    
+    <div class="rectangle-140"></div>
+    <div class="ellipse-20"></div>
+    <img class="social-responsibility-2" src="image/social-responsibility 1 (1).png" alt="Footer Logo" />
+    <div class="baryo-tap2">BARYO TAP</div>
+    
+    <div class="explore">EXPLORE</div>
+    <div class="submit-report-complaint">Submit Report / Complaint</div>
+    <div class="request-barangay-documents">Request Barangay Documents</div>
+    <div class="market-price-analytics">Market Price Analytics</div>
+    <div class="announcement-and-updates">Announcement and Updates</div>
+    <div class="resident-support-desk">Resident Support Desk</div>
+    
+    <div class="services">SERVICES</div>
+    <div class="indigency-certificate-request">Indigency Certificate Request</div>
+    <div class="barangay-clearance-request">Barangay Clearance Request</div>
+    <div class="business-permit-assistance">Business Permit Assistance</div>
+    <div class="community-concern-tracking">Community Concern Tracking</div>
+    
+    <div class="contact-us">CONTACT US</div>
+    <img class="location-2-1" src="image/location (2) 1.png" alt="Location Icon" />
+    <div class="mantalongon-dalaguete-cebu">Mantalongon, Dalaguete, Cebu</div>
+    <img class="mail-1" src="image/mail 1.png" alt="Mail Icon" />
+    <div class="baryotap-gmail-com">baryotap@gmail.com</div>
+    <img class="telephone-1-7" src="image/telephone (1) 7.png" alt="Phone Icon" />
+    <div class="_09511312976">09511312976</div>
+    
+    <div
+      class="a-digital-barangay-service-portal-designed-requests-and-market-price-monitoring-faster-transparent-and-more-accessible-to-all-residents-of-mantalongon-dalaguete-cebu"
+    >
+      A digital barangay service portal designed requests, and market price
+      monitoring faster, transparent, and more accessible to all residents of
+      Mantalongon, Dalaguete, Cebu.
+    </div>
+
+</div>
+</body>
+</html>

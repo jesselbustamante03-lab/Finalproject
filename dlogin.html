@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* --- MESSAGE STYLES --- */
+.success-message {
+    padding: 15px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+}
+.error-text { 
+    font-size: 13px; 
+    color: red; 
+    margin-top: 6px; 
+    padding-left: 4px; 
+}
+
+/* --- GENERAL & LAYOUT --- */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+body {
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    background: url('image/Blue%20Modern%20Business%20Facebook%20Cover%20(4).png') center/cover no-repeat fixed;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    padding: 20px;
+}
+.login-card { 
+    width: 100%; 
+    max-width: 1060px; 
+    height: 660px; 
+    border-radius: 26px; 
+    overflow: hidden; 
+    box-shadow: 0 15px 45px rgba(0,0,0,0.35); 
+    background: url('image/login.png') center/cover no-repeat; 
+    position: relative; 
+    display: flex; 
+    align-items: center; 
+    justify-content: flex-end; 
+    padding-right: 80px; 
+}
+.back-btn { 
+    position: absolute; 
+    top: 40px; 
+    left: 40px; 
+    width: 52px; 
+    height: 52px; 
+    background: rgba(255,255,255,0.95); 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    cursor: pointer; 
+    transition: .3s; 
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3); 
+    z-index: 10; 
+}
+.back-btn:hover { 
+    transform: scale(1.15) translateX(-8px); 
+    background: white; 
+}
+.form-container { 
+    width: 100%; 
+    max-width: 460px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 22px; 
+}
+.title { 
+    font-size: 38px; 
+    font-weight: 700; 
+    text-align: center; 
+}
+
+/* --- INPUTS --- */
+.input-group { 
+    position: relative; 
+}
+.input-field { 
+    width: 100%; 
+    height: 62px; 
+    padding: 0 30px; 
+    border: 1.8px solid #187605; 
+    border-radius: 10px; 
+    background: #e9fed4; 
+    font-size: 16px; 
+    outline: none; 
+    transition: 0.3s; 
+}
+.input-label { 
+    position: absolute; 
+    left: 18px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    background: #e9fed4; 
+    padding: 0 8px; 
+    font-size: 16px; 
+    transition: 0.25s; 
+}
+.input-field:focus + .input-label, .input-field:not(:placeholder-shown) + .input-label { 
+    top: 0; 
+    font-size: 13px; 
+    color: #187605; 
+    font-weight: 600; 
+}
+.eye { 
+    position: absolute; 
+    right: 18px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    width: 30px; 
+    height: 30px; 
+    cursor: pointer; 
+}
+.options { 
+    display: flex; 
+    justify-content: space-between; 
+    font-size: 14px; 
+}
+.signin-btn { 
+    width: 100%; 
+    height: 68px; 
+    border-radius: 10px; 
+    background: rgba(24,118,5,0.59); 
+    border: 1.8px solid #000; 
+    font-family: 'Outfit', sans-serif; 
+    font-size: 32px; 
+    cursor: pointer; 
+    transition: 0.3s; 
+}
+.signin-btn:hover { 
+    background: rgba(24,118,5,0.85); 
+}
+.signup { 
+    text-align: center; 
+}
+
+
+/* --- POPUP GENERAL --- */
+.overlay { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0,0,0,0.68); 
+    display: none; 
+    align-items: center; 
+    justify-content: center; 
+    z-index: 200; 
+}
+.popup-box { 
+    width: 380px; 
+    background: white; 
+    padding: 28px; 
+    border-radius: 16px; 
+    text-align: center; 
+    animation: pop .25s ease-out; 
+}
+@keyframes pop { 
+    from { 
+        transform: scale(0.7); 
+        opacity: 0; 
+    } 
+    to { 
+        transform: scale(1); 
+        opacity: 1; 
+    } 
+}
+.otp-inputs { 
+    display: flex; 
+    justify-content: center; 
+    gap: 12px; 
+    margin: 18px 0; 
+}
+.otp-inputs input { 
+    width: 45px; 
+    height: 55px; 
+    text-align: center; 
+    font-size: 22px; 
+    border: 1.8px solid #187605; 
+    border-radius: 10px; 
+}
+.popup-buttons { 
+    display: flex; 
+    justify-content: space-between; 
+    margin-top: 20px; 
+    gap: 14px; 
+}
+.btn { 
+    flex: 1; 
+    padding: 12px 0; 
+    font-size: 18px; 
+    border-radius: 10px; 
+    cursor: pointer; 
+    border: none; 
+}
+.cancel-btn { 
+    background: #d9534f; 
+    color: white; 
+}
+.submit-btn { 
+    background: #187605; 
+    color: white; 
+}
+.timer { 
+    margin-top: 10px; 
+    font-size: 16px; 
+    color: #555; 
+}
+#resendOTP { 
+    display: none; 
+    color: #187605; 
+    cursor: pointer; 
+    margin-top: 8px; 
+    font-weight: bold; 
+    text-decoration: underline; 
+}
+
+/* --- RESET POPUP SPECIFIC --- */
+#resetPopup .popup-box { 
+    width: 400px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+    position: relative; 
+}
+#resetPopup input { 
+    width: 100%; 
+    padding: 12px; 
+    font-size: 16px; 
+    border-radius: 10px; 
+    border: 1.5px solid #187605; 
+}
+#resetPopup button { 
+    width: 100%; 
+    padding: 12px; 
+    font-size: 18px; 
+    border-radius: 10px; 
+    background: #187605; 
+    color: white; 
+    border: none; 
+    cursor: pointer; 
+}
+#resetPopup .error-text { 
+    margin-top: 0; 
+    text-align: left; 
+}
+.reset-eye { 
+    position: absolute; 
+    right: 20px; 
+    top: 12px; 
+    width: 26px; 
+    height: 26px; 
+    cursor: pointer; 
+}
+</style>
+</head>
+<body>
+
+<div class="login-card">
+    <div class="back-btn" onclick="history.back()">
+        <img src="image/back 3.png" width="28">
+    </div>
+    
+    <div class="form-container">
+        <div id="statusMessage"></div>
+
+        <div class="title">SIGN IN</div>
+
+        <form id="loginForm"> 
+            <div class="input-group">
+                <input type="email" id="email" name="email" class="input-field" placeholder=" " required>
+                <label class="input-label">Email</label>
+                <div class="error-text" id="emailError"></div>
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="password" name="password" class="input-field" placeholder=" " required>
+                <label class="input-label">Password</label>
+                <img src="image/hidden.png" class="eye" id="eyeToggle">
+                <div class="error-text" id="loginPassError"></div>
+            </div>
+
+            <div class="options">
+                <label><input type="checkbox"> Remember me</label>
+                <a href="#" id="forgotBtn">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="signin-btn" id="signinBtn">Sign In</button>
+        </form>
+        <div class="signup">Don’t have an account? <a href="dsignup.html">Sign up</a></div>
+    </div>
+</div>
+
+<div class="overlay" id="emailPopup">
+    <div class="popup-box">
+        <h2>Recover Account</h2>
+        <p>Enter your Phone Number</p>
+        <input id="recoverInput" class="input-field" placeholder="Phone Number" style="width:100%; height:50px;">
+        <div class="error-text" id="recoverError" style="display:none;">Please enter a valid 11-digit phone number</div>
+        <div class="popup-buttons">
+            <button class="btn cancel-btn" id="cancelEmail">Cancel</button>
+            <button class="btn submit-btn" id="sendOTP">Send OTP</button>
+        </div>
+    </div>
+</div>
+
+<div class="overlay" id="otpPopup">
+    <div class="popup-box">
+        <h2>Enter 6-Digit OTP</h2>
+        <div class="otp-inputs">
+            <input maxlength="1">
+            <input maxlength="1">
+            <input maxlength="1">
+            <input maxlength="1">
+            <input maxlength="1">
+            <input maxlength="1">
+        </div>
+        <div class="timer" id="timer">00:30</div>
+        <div class="error-text" id="otpError" style="display:none;">Invalid OTP number</div>
+        <div id="resendOTP">Resend OTP</div>
+        <div class="popup-buttons">
+            <button class="btn cancel-btn" id="cancelOTP">Cancel</button>
+            <button class="btn submit-btn" id="submitOTP">Submit</button>
+        </div>
+    </div>
+</div>
+
+<div class="overlay" id="resetPopup">
+    <div class="popup-box">
+        <h2>Reset Password</h2>
+        <div style="position:relative;">
+            <input type="password" id="newPass" placeholder="New Password">
+            <img src="image/hidden.png" class="reset-eye" id="eyeNew">
+        </div>
+        <div style="position:relative;">
+            <input type="password" id="confirmPass" placeholder="Confirm Password">
+            <img src="image/hidden.png" class="reset-eye" id="eyeConfirm">
+        </div>
+        <div class="error-text" id="passError"></div>
+        <div class="popup-buttons">
+            <button class="btn cancel-btn" id="cancelReset">Cancel</button>
+            <button class="btn submit-btn" id="submitReset">Submit</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ---------------------------------------------
+// --- ELEMENT INITIALIZATION ---
+// ---------------------------------------------
+const emailField = document.getElementById('email');
+const passwordField = document.getElementById('password');
+const loginForm = document.getElementById('loginForm');
+const statusMessageContainer = document.getElementById('statusMessage');
+
+const emailError = document.getElementById('emailError');
+const loginPassError = document.getElementById('loginPassError');
+const eye = document.getElementById('eyeToggle');
+
+const forgotBtn = document.getElementById("forgotBtn");
+const emailPopup = document.getElementById("emailPopup");
+const otpPopup = document.getElementById("otpPopup");
+const otpInputs = document.querySelectorAll(".otp-inputs input");
+const otpError = document.getElementById("otpError");
+const resendOTP = document.getElementById("resendOTP");
+const submitOTPBtn = document.getElementById("submitOTP");
+const recoverInput = document.getElementById("recoverInput");
+const recoverError = document.getElementById("recoverError");
+const resetPopup = document.getElementById("resetPopup");
+const newPass = document.getElementById("newPass");
+const confirmPass = document.getElementById("confirmPass");
+const passError = document.getElementById("passError");
+const cancelResetBtn = document.getElementById("cancelReset");
+const submitResetBtn = document.getElementById("submitReset");
+const eyeNew = document.getElementById("eyeNew");
+const eyeConfirm = document.getElementById("eyeConfirm");
+const correctOTP = "123456"; // Placeholder OTP (Needs Server-Side Implementation)
+
+// ---------------------------------------------
+// --- HELPER FUNCTIONS ---
+// ---------------------------------------------
+
+function displayMessage(type, message) {
+    let html = '';
+    if (type === 'success') {
+        html = `<div class="success-message">${message}</div>`;
+    } else if (type === 'error') {
+        html = `<div class="error-text" style="color:red; text-align:center;">${message}</div>`;
+    }
+    statusMessageContainer.innerHTML = html;
+}
+
+function checkRegistrationStatus() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === '1') {
+        displayMessage('success', '✅ Registration successful! You can now log in.');
+        
+        // Remove the parameter from the URL bar
+        if (window.history.replaceState) {
+            const cleanUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, cleanUrl);
+        }
+    }
+}
+
+checkRegistrationStatus();
+
+
+// ---------------------------------------------
+// --- MAIN LOGIN LOGIC (AJAX to login.php) ---
+// ---------------------------------------------
+
+// Input field event listeners (visual validation)
+emailField.addEventListener('input', ()=>{ emailError.textContent = emailField.value.includes("@gmail.com") ? "" : "Email must contain '@gmail.com'"; });
+passwordField.addEventListener('input', ()=>{ loginPassError.textContent = passwordField.value.trim().length < 8 ? "Password must be minimum of 8 characters" : ""; });
+eye.addEventListener('click', ()=>{ 
+    if(passwordField.type==="password"){ 
+        passwordField.type="text"; eye.src="image/eye 1.png"; 
+    } else{ 
+        passwordField.type="password"; eye.src="image/hidden.png"; 
+    } 
+});
+
+
+// Login Form Submission Handler - Connects to login.php
+loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const emailVal = emailField.value.trim();
+    const passVal = passwordField.value.trim();
+    let valid = true;
+    statusMessageContainer.innerHTML = '';
+
+    // 1. Client-side validation check
+    if(!emailVal.includes("@gmail.com")){
+        emailError.textContent = "Email must contain '@gmail.com'";
+        valid = false;
+    } else { emailError.textContent = ""; }
+
+    if(passVal.length < 8){
+        loginPassError.textContent = "Password must be minimum of 8 characters";
+        valid = false;
+    } else { loginPassError.textContent = ""; }
+
+    if(valid){
+        // 2. Prepare data for server
+        const formData = new FormData();
+        formData.append('email', emailVal);
+        formData.append('password', passVal);
+
+        // 3. Send data to login.php script via Fetch API
+        fetch('login.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            // Check if login.php issued a redirect (SUCCESS)
+            if (response.redirected) {
+                window.location.href = response.url; // Go to main.php
+                return; 
+            }
+            // If not redirected, login.php sent an error script/message
+            return response.text();
+        })
+        .then(text => {
+             if (text) {
+                 // Extract the error message from the PHP alert script
+                 const errorMessage = text.replace(/<script>alert\(['"](.*)['"]\);.*<\/script>/, '$1').trim();
+                 displayMessage('error', errorMessage);
+                 passwordField.value = ''; // Clear password field on error
+             }
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+            displayMessage('error', 'A network error occurred. Please try again.');
+        });
+    }
+});
+
+
+// ---------------------------------------------
+// --- FORGOT PASSWORD POPUPS LOGIC ---
+// ---------------------------------------------
+
+// Show/Hide password for reset popup fields
+eyeNew.addEventListener("click", ()=>{ newPass.type==="password"? (newPass.type="text", eyeNew.src="image/eye 1.png"):(newPass.type="password", eyeNew.src="image/hidden.png"); });
+eyeConfirm.addEventListener("click", ()=>{ confirmPass.type==="password"? (confirmPass.type="text", eyeConfirm.src="image/eye 1.png"):(confirmPass.type="password", eyeConfirm.src="image/hidden.png"); });
+
+// Reset password validation
+newPass.addEventListener("input", ()=>{ passError.style.display=newPass.value.trim().length<8?"block":"none"; passError.textContent="Password must be minimum of 8 characters"; });
+confirmPass.addEventListener("input", ()=>{ 
+    if(!newPass.value.trim()){ passError.style.display="block"; passError.textContent="Need to input 1st the new password"; }
+    else if(confirmPass.value.trim()!==newPass.value.trim()){ passError.style.display="block"; passError.textContent="Incorrect password"; }
+    else{ passError.style.display="none"; }
+});
+
+// Forgot password flow
+forgotBtn.addEventListener("click", ()=>{ emailPopup.style.display="flex"; });
+document.getElementById("cancelEmail").addEventListener("click", ()=>{ emailPopup.style.display="none"; });
+
+document.getElementById("sendOTP").addEventListener("click", ()=>{
+    const phone = recoverInput.value.trim();
+    if(phone.length!==11 || !/^\d+$/.test(phone)){ 
+        recoverError.style.display="block"; 
+    }
+    else{ 
+        recoverError.style.display="none"; 
+        emailPopup.style.display="none"; 
+        otpPopup.style.display="flex"; 
+        startTimer(); 
+        otpInputs[0].focus(); 
+    }
+});
+
+// Auto-focus logic for OTP inputs
+otpInputs.forEach((input,index)=>{ 
+    input.addEventListener("input", ()=>{ 
+        if(input.value && index<otpInputs.length-1) otpInputs[index+1].focus(); 
+    }); 
+});
+
+document.getElementById("cancelOTP").addEventListener("click", ()=>{ 
+    otpPopup.style.display="none"; 
+    resetTimer(); 
+    otpError.style.display="none"; 
+    resendOTP.style.display="none"; 
+    emailPopup.style.display="flex"; 
+});
+
+submitOTPBtn.addEventListener("click", ()=>{
+    let enteredOTP = Array.from(otpInputs).map(i=>i.value).join("");
+    if(enteredOTP.length<6 || enteredOTP!==correctOTP){ 
+        if(enteredOTP.length>0){ 
+            otpError.style.display="block"; 
+        } 
+        otpInputs.forEach(i=>i.value=""); 
+        otpInputs[0].focus(); 
+    }
+    else{ 
+        otpError.style.display="none"; 
+        otpPopup.style.display="none"; 
+        resetTimer(); 
+        resetPopup.style.display="flex"; 
+    }
+});
+
+// OTP Timer Logic
+let timerInterval; 
+let timeLeft=30;
+function startTimer(){ 
+    timeLeft=30; 
+    document.getElementById("timer").textContent="00:30"; 
+    resendOTP.style.display="none"; 
+    otpError.style.display="none"; 
+    timerInterval=setInterval(()=>{ 
+        timeLeft--; 
+        document.getElementById("timer").textContent="00:"+String(timeLeft).padStart(2,"0"); 
+        if(timeLeft<=0){ 
+            clearInterval(timerInterval); 
+            resendOTP.style.display="block"; 
+        } 
+    },1000); 
+}
+function resetTimer(){ 
+    clearInterval(timerInterval); 
+    document.getElementById("timer").textContent="00:30"; 
+    resendOTP.style.display="none"; 
+}
+
+resendOTP.addEventListener("click", ()=>{ 
+    otpInputs.forEach(i=>i.value=""); 
+    otpInputs[0].focus(); 
+    resendOTP.style.display="none"; 
+    otpError.style.display="none"; 
+    startTimer(); 
+    alert("A new OTP has been sent!"); 
+});
+
+// Reset password handlers
+cancelResetBtn.addEventListener("click", ()=>{ 
+    resetPopup.style.display="none"; 
+    newPass.value=""; 
+    confirmPass.value=""; 
+    passError.style.display="none"; 
+    emailPopup.style.display="flex"; 
+});
+
+submitResetBtn.addEventListener("click", ()=>{
+    const passVal=newPass.value.trim(); 
+    const confirmVal=confirmPass.value.trim();
+    if(passVal.length<8){ 
+        passError.textContent="Password must be minimum of 8 characters"; 
+        passError.style.display="block"; 
+    }
+    else if(!confirmVal){ 
+        passError.textContent="Need to input 1st the new password"; 
+        passError.style.display="block"; 
+    }
+    else if(confirmVal!==passVal){ 
+        passError.textContent="Incorrect password"; 
+        passError.style.display="block"; 
+    }
+    else{ 
+        // Success Logic (In a real app, this is where you'd call a PHP script to update the password)
+        passError.style.display="none"; 
+        resetPopup.style.display="none"; 
+        alert("Password reset successful!"); 
+        window.location.href="dlogin.html"; 
+    }
+});
+</script>
+</body>
+</html>

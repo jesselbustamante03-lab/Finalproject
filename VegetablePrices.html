@@ -1,0 +1,729 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vegetable Prices - Baryo Tap</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* =========================================
+            1. SHARED LAYOUT & SIDEBAR STYLES
+            ========================================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html, body {
+            min-height: 100vh; 
+            font-family: 'Inter', sans-serif;
+            background: url(image/background.png) center/cover no-repeat fixed;
+            overflow-x: hidden; 
+        }
+
+        /* Layout Container */
+        .layout {
+            display: flex;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        /* --- LEFT SIDEBAR --- (No major changes) */
+        .sidebar {
+            width: 432px;
+            background: #f3fff5;
+            padding: 25px 22px;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            min-height: 100vh;
+            position: sticky; 
+            top: 0; 
+            z-index: 10;
+        }
+
+        .logo-area { display: flex; align-items: center; gap: 14px; margin-bottom: 35px; }
+        .logo-area img { width: 70px; height: 70px; }
+        .logo-text { font-size: 28px; font-weight: 800; color: #000; }
+
+        .menu-item {
+            display: flex; align-items: center; gap: 14px; padding: 10px 14px; 
+            margin-bottom: 55px; border-radius: 16px; background: transparent;
+            transition: all 0.3s ease; cursor: pointer; text-decoration: none;
+        }
+        .menu-item:hover { background: rgba(24, 118, 5, 0.35); transform: translateX(5px); }
+        .menu-item.active { 
+            background: rgba(24, 118, 5, 0.35); 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .menu-item img { width: 46px; height: 46px; }
+        .menu-item span { font-size: 22px; font-weight: 600; color: #000; }
+
+        .divider { height: 2px; background: #187605; margin: 70px 0 20px 0; flex-shrink: 0; }
+
+        /* PROFILE */
+        .profile { text-align: center; margin-top: auto; padding-bottom: 15px; }
+        .profile-img {
+            width: 70px; height: 70px; border-radius: 50%; border: 3px solid #187605;
+            box-shadow: inset 0 4px 8px rgba(0,0,0,0.3), 0 4px 10px rgba(0,0,0,0.3);
+            margin-bottom: 10px; object-fit: cover;
+        }
+        .profile-name { font-size: 24px; font-weight: 600; color: #000; margin-bottom: 4px; }
+        .profile-email { font-size: 21px; color: #000; }
+
+        .sidebar-footer {
+             padding-top: 10px; font-size: 14px; text-align: center; color: #555;
+             border-top: 1px solid #ddd; flex-shrink: 0;
+        }
+        
+        /* =========================================
+            2. MAIN CONTENT STYLES (Vegetable Prices) 
+            ========================================= */
+        .main-area {
+            flex: 1;
+            padding: 40px 30px;
+            overflow-x: hidden;
+            background-color: transparent;
+        }
+
+        /* Central Container */
+        .main-content {
+            max-width: 900px; 
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* HEADER / DATE SECTION */
+        .header-card {
+            background-color: rgba(184, 247, 194, 0.9);
+            border-radius: 20px;
+            box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2);
+            /* MODIFIED: Reduced padding for a thinner header */
+            padding: 15px 20px; 
+            text-align: center;
+        }
+        .header-title {
+            font-family: "Inter", sans-serif;
+            font-weight: 800;
+            color: #000000;
+            font-size: 26px;
+            /* MODIFIED: Reduced margin for a thinner header */
+            margin-bottom: 10px; 
+        }
+        .date-container { display: flex; justify-content: center; align-items: center; gap: 20px; }
+        .date-nav {
+            background: none; border: none; cursor: pointer; font-size: 24px;
+            color: #187605; padding: 5px; transition: color 0.2s;
+        }
+        .date-nav:hover { color: #072201; }
+        .current-date {
+            font-family: "Inter", sans-serif; font-weight: 600; font-size: 20px;
+            color: #000; background-color: #ffffff; padding: 8px 15px;
+            border-radius: 10px; min-width: 150px; text-align: center;
+        }
+
+        /* VEGETABLE LIST: TWO-COLUMN GRID */
+        .vegetable-list {
+            display: grid;
+            /* MODIFIED: Column width reduced from 350px to 280px to make containers thinner */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            /* Gap lessened */
+            gap: 15px; 
+        }
+
+        /* INDIVIDUAL VEGETABLE ITEM */
+        .vegetable-item {
+            background-color: #B8F7C2; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            /* MODIFIED: Padding reduced from 15px 20px to 10px 15px to make container thinner/shorter */
+            padding: 10px 15px; 
+            display: flex;
+            flex-direction: column; 
+            position: relative;
+        }
+
+        /* Main Row: Image + Name vs Price */
+        .name-price-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; 
+        }
+        
+        /* Group for Image and Name (Left side) */
+        .name-info { display: flex; align-items: center; gap: 10px; } /* Reduced image/name gap */
+        
+        /* Image Style */
+        .vegetable-image {
+            width: 40px; /* Reduced size */
+            height: 40px; /* Reduced size */
+            object-fit: contain;
+            flex-shrink: 0;
+            border-radius: 5px; 
+        }
+
+        .vegetable-name {
+            font-family: "Inter", sans-serif; font-weight: 800;
+            color: #072201; 
+            font-size: 18px; /* Reduced size */
+            flex-shrink: 1;
+        }
+        
+        /* === MODIFIED PRICE STYLES === */
+        .vegetable-price {
+            font-family: "Inter", sans-serif; 
+            font-weight: 700;
+            color: #000000; 
+            font-size: 16px; /* REDUCED from 20px */
+            background-color: #ffffff;
+            padding: 4px 6px; /* REDUCED horizontal padding from 8px */
+            border-radius: 8px;
+            flex-shrink: 0; 
+        }
+        .vegetable-unit {
+            font-family: "Inter", sans-serif; 
+            font-weight: 500;
+            color: #555; 
+            font-size: 11px; /* REDUCED from 13px */
+            margin-left: 5px;
+        }
+        /* =============================== */
+        
+        /* =========================================
+            3. FOOTER STYLES (CORRECTED FOR RESPONSIVENESS)
+            ========================================= */
+        .rectangle-139 {
+            background: rgba(7, 34, 1, 0.95);
+            width: 100%;
+            min-height: 300px; /* Use min-height or height: auto */
+            position: relative;
+            padding: 30px 0;
+            flex-shrink: 0; 
+        }
+        .footer-content-wrapper {
+            /* Use Flexbox for responsive columns */
+            display: flex;
+            justify-content: space-between;
+            /* Set a max width and center the content */
+            max-width: 1400px; 
+            margin: 0 auto;
+            padding: 0 40px; /* Add internal side padding */
+            gap: 30px; /* Add space between columns */
+        }
+
+        /* New: Style for the column wrappers */
+        .footer-col {
+            display: flex;
+            flex-direction: column;
+            flex-basis: 25%;
+            min-width: 200px; /* Ensures columns don't get too squished before wrapping */
+        }
+
+        /* Style for the logo/title group */
+        .logo-area-footer {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+        .logo-area-footer img { width: 55px; height: 55px; } 
+        .logo-area-footer .baryo-tap2 { 
+            font-family: "Poppins-ExtraBold", sans-serif;
+            font-size: 20px; 
+            font-weight: 800;
+            color: #ffffff;
+        }
+        /* Apply general styles and remove absolute positioning from original footer elements */
+        .a-digit-barangay-service-portal-designed-requests-and-market-price-monitoring-faster-transparent-and-more-accessible-to-all-residents-of-mantalongon-dalaguete-cebu,
+        .submit-report-complaint-request-barangay-documents-market-price-analytics-announcement-and-updates-resident-support-desk,
+        .indigency-certificate-request-barangay-clearance-request-business-permit-assistance-community-concern-tracking {
+            color: #ffffff; 
+            font-family: "Inter-Medium", sans-serif; 
+            font-size: 15px; 
+            line-height: 2.4;
+            position: static;
+            width: auto;
+        }
+        .explore, .services, .contact-us {
+            color: #ffffff; 
+            font-family: "Poppins-ExtraBold", sans-serif; 
+            font-size: 20px; 
+            font-weight: 800;
+            position: static;
+            margin-bottom: 15px; /* Add vertical space below titles */
+        }
+        .contact-column {
+            color: #ffffff;
+            position: static;
+            width: auto;
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px;
+        }
+        .ellipse-20 { display: none; } /* Hidden as it's not needed in new structure */
+
+        /* Media query for small screens: stack columns vertically */
+        @media (max-width: 1000px) {
+            .footer-content-wrapper {
+                flex-direction: column;
+                gap: 40px;
+                padding: 30px 20px;
+            }
+            .footer-col {
+                min-width: auto;
+                flex-basis: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="layout">
+    
+    <div class="sidebar">
+        <div class="logo-area">
+            <a href="main.php" style="text-decoration: none; display: flex; align-items: center; gap: 14px;">
+                <img src="image/social-responsibility 1 (1).png" alt="Logo">
+                <div class="logo-text">Baryo Tap</div>
+            </a>
+        </div>
+
+        <a href="dreport.php" class="menu-item" style="text-decoration: none;">
+            <img src="image/report-issue.png" alt="">
+            <span>Report Issue</span>
+        </a>
+        <a href="VegetablePrices.html" class="menu-item active" style="text-decoration: none;">
+            <img src="image/basket.png" alt="">
+            <span>Vegetable Prices</span>
+        </a>
+        <a href="contacts.php" class="menu-item" style="text-decoration: none;">
+            <img src="image/medical-call.png" alt="">
+            <span>Emergency Contact</span>
+        </a>
+        <a href="RequestDocu.php" class="menu-item" style="text-decoration: none;">
+            <img src="image/quote-request.png" alt="">
+            <span>Request Document</span>
+        </a>
+        <a href="dlogin.html" class="menu-item" style="text-decoration: none;">
+            <img src="image/logout (2).png" alt="">
+            <span>Logout</span>
+        </a>
+
+        <div class="divider"></div>
+
+        
+        <a href="Profile.php" class="profile-link" style="text-decoration: none;">
+    <div class="profile">
+        <img src="image/mayor.png" alt="Profile" class="profile-img">
+        <div class="profile-name">Jenisel Carinoza</div>
+        <div class="profile-email">ann@gmail.com</div>
+    </div>
+</a>
+
+        <div class="sidebar-footer">
+            &copy; 2025 Baryo Tap.
+        </div>
+    </div>
+    <div class="main-area">
+        <div class="main-content">
+            
+            <div class="header-card">
+                <div class="header-title">Vegetable Price Monitoring</div>
+                <div class="date-container">
+                    <button class="date-nav" id="prevDay">‹</button>
+                    <div class="current-date" id="currentDateDisplay">November 28, 2025</div>
+                    <button class="date-nav" id="nextDay">›</button>
+                </div>
+            </div>
+            
+            <div class="vegetable-list">
+                
+                <div class="vegetable-item">
+                    <div class="name-price-group">
+                        <div class="name-info">
+                            <img src="image/repolyo.png" alt="Repolyo" class="vegetable-image">
+                            <span class="vegetable-name">Repolyo</span>
+                        </div>
+                        <span class="vegetable-price">31.00 <span class="vegetable-unit">PHP</span></span>
+                    </div>
+                </div>
+
+                <div class="vegetable-item">
+                    <div class="name-price-group">
+                        <div class="name-info">
+                            <img src="image/petchay.png" alt="Petchay" class="vegetable-image">
+                            <span class="vegetable-name">Petchay</span>
+                        </div>
+                        <span class="vegetable-price">15.00 <span class="vegetable-unit">PHP</span></span>
+                    </div>
+                </div>
+
+                <div class="vegetable-item">
+                    <div class="name-price-group">
+                        <div class="name-info">
+                            <img src="image/camote.png" alt="Camote" class="vegetable-image">
+                            <span class="vegetable-name">Camote</span>
+                        </div>
+                        <span class="vegetable-price">25.00 <span class="vegetable-unit">PHP</span></span>
+                    </div>
+                </div>
+
+                <div class="vegetable-item">
+                    <div class="name-price-group">
+                        <div class="name-info">
+                            <img src="image/carrots.png" alt="Carrots" class="vegetable-image">
+                            <span class="vegetable-name">Carrots</span>
+                        </div>
+                        <span class="vegetable-price">80.00 <span class="vegetable-unit">PHP</span></span>
+                    </div>
+                </div>
+
+                <div class="vegetable-item">
+                    <div class="name-price-group">
+                        <div class="name-info">
+                            <img src="image/beans.png" alt="Beans" class="vegetable-image">
+                            <span class="vegetable-name">Beans</span>
+                        </div>
+                        <span class="vegetable-price">25.00 <span class="vegetable-unit">PHP</span></span>
+                    </div>
+                </div>
+
+                <div class="vegetable-item">
+                    <div class="name-price-group">
+                        <div class="name-info">
+                            <img src="image/talong.png" alt="Talong" class="vegetable-image">
+                            <span class="vegetable-name">Talong</span>
+                        </div>
+                        <span class="vegetable-price">40.00 <span class="vegetable-unit">PHP</span></span>
+                    </div>
+                </div>
+                
+                <div class="vegetable-item">
+                    <div class="name-price-group">
+                        <div class="name-info">
+                            <img src="image/gabi.png" alt="Gabi" class="vegetable-image">
+                            <span class="vegetable-name">Gabi</span> 
+                        </div>
+                        <span class="vegetable-price">50.00 <span class="vegetable-unit">PHP</span></span>
+                    </div>
+                </div>
+
+                <div class="vegetable-item">
+                    <div class="name-price-group">
+                        <div class="name-info">
+                            <img src="image/atsal.png" alt="Atsal" class="vegetable-image">
+                            <span class="vegetable-name">Atsal</span>
+                        </div>
+                        <span class="vegetable-price">160.00<span class="vegetable-unit">PHP</span></span>
+                    </div>
+                </div>
+
+                <div class="vegetable-item">
+                    <div class="name-price-group">
+                        <div class="name-info">
+                            <img src="image/kalabasa.png" alt="Kalabasa" class="vegetable-image">
+                            <span class="vegetable-name">Kalabasa</span> 
+                        </div>
+                        <span class="vegetable-price">40.00 <span class="vegetable-unit">PHP</span></span>
+                    </div>
+                </div>
+
+                <div class="vegetable-item">
+                    <div class="name-price-group">
+                        <div class="name-info">
+                            <img src="image/sibuyas dahonan.png" alt="Sibuyas Dahunan" class="vegetable-image">
+                            <span class="vegetable-name">Sibuyas Dahunan</span> 
+                        </div>
+                        <span class="vegetable-price">65.00 <span class="vegetable-unit">PHP</span></span>
+                    </div>
+                </div>
+                
+                <div class="vegetable-item">
+                    <div class="name-price-group">
+                        <div class="name-info">
+                            <img src="image/sili espada.png" alt="Siling Espada" class="vegetable-image">
+                            <span class="vegetable-name">Siling Espada</span> 
+                        </div>
+                        <span class="vegetable-price">80.00 <span class="vegetable-unit">PHP</span></span>
+                    </div>
+                </div>
+
+                <div class="vegetable-item">
+                    <div class="name-price-group">
+                        <div class="name-info">
+                            <img src="image/sayote.png" alt="Sayote" class="vegetable-image">
+                            <span class="vegetable-name">Sayote</span> 
+                        </div>
+                        <span class="vegetable-price">12.00 <span class="vegetable-unit">PHP</span></span>
+                    </div>
+                </div>
+
+                <div class="vegetable-item">
+                    <div class="name-price-group">
+                        <div class="name-info">
+                            <img src="image/kamatis.png" alt="Kamatis" class="vegetable-image">
+                            <span class="vegetable-name">Kamatis</span> 
+                        </div>
+                        <span class="vegetable-price">60.00 <span class="vegetable-unit">PHP</span></span>
+                    </div>
+                </div>
+
+                <div class="vegetable-item">
+                    <div class="name-price-group">
+                        <div class="name-info">
+                            <img src="image/paliya.png" alt="Paliya" class="vegetable-image">
+                            <span class="vegetable-name">Paliya</span> 
+                        </div>
+                        <span class="vegetable-price">55.00 <span class="vegetable-unit">PHP</span></span>
+                    </div>
+                </div>
+
+                <div class="vegetable-item">
+                    <div class="name-price-group">
+                        <div class="name-info">
+                            <img src="image/balatong.png" alt="Balatong" class="vegetable-image">
+                            <span class="vegetable-name">Balatong</span> 
+                        </div>
+                        <span class="vegetable-price">25.00 <span class="vegetable-unit">PHP</span></span>
+                    </div>
+                </div>
+
+                <div class="vegetable-item">
+                    <div class="name-price-group">
+                        <div class="name-info">
+                            <img src="image/sili labuyo.png" alt="Sili Labuyo" class="vegetable-image">
+                            <span class="vegetable-name">Chili (Sili Labuyo)</span> 
+                        </div>
+                        <span class="vegetable-price">250.00 <span class="vegetable-unit">PHP</span></span>
+                    </div>
+                </div>
+
+                <div class="vegetable-item">
+                    <div class="name-price-group">
+                        <div class="name-info">
+                            <img src="image/siling halang kulikot.png" alt="Sili Halang/Kulikot" class="vegetable-image">
+                            <span class="vegetable-name">Siling Kulikot</span> 
+                        </div>
+                        <span class="vegetable-price">160.00 <span class="vegetable-unit">PHP</span></span>
+                    </div>
+                </div>
+
+                <div class="vegetable-item">
+                    <div class="name-price-group">
+                        <div class="name-info">
+                            <img src="image/okra.png" alt="Okra" class="vegetable-image">
+                            <span class="vegetable-name">Okra</span> 
+                        </div>
+                        <span class="vegetable-price">40.00 <span class="vegetable-unit">PHP</span></span>
+                    </div>
+                </div>
+
+                <div class="vegetable-item">
+                    <div class="name-price-group">
+                        <div class="name-info">
+                            <img src="image/luy a.png" alt="Water Spinach" class="vegetable-image">
+                            <span class="vegetable-name">Luy a</span> 
+                        </div>
+                        <span class="vegetable-price">80.00 <span class="vegetable-unit">PHP</span></span>
+                    </div>
+                </div>
+
+                <div class="vegetable-item">
+                    <div class="name-price-group">
+                        <div class="name-info">
+                            <img src="image/pipino.png" alt="Pipino" class="vegetable-image">
+                            <span class="vegetable-name">Pipino</span> 
+                        </div>
+                        <span class="vegetable-price">15.00 <span class="vegetable-unit">PHP</span></span>
+                    </div>
+                </div>
+                
+                <div class="vegetable-item">
+                    <div class="name-price-group">
+                        <div class="name-info">
+                            <img src="image/lettuce ball.png" alt="Peanuts" class="vegetable-image">
+                            <span class="vegetable-name">Lettuce Ball</span> 
+                        </div>
+                        <span class="vegetable-price">35.00 <span class="vegetable-unit">PHP</span></span>
+                    </div>
+                </div>
+
+                <div class="vegetable-item">
+                    <div class="name-price-group">
+                        <div class="name-info">
+                            <img src="image/sweet corn.png" alt="Bottle Gourd" class="vegetable-image">
+                            <span class="vegetable-name">Sweetcorn</span> 
+                        </div>
+                        <span class="vegetable-price">22.00 <span class="vegetable-unit">PHP</span></span>
+                    </div>
+                </div>
+
+                <div class="vegetable-item">
+                    <div class="name-price-group">
+                        <div class="name-info">
+                            <img src="image/raddish.png" alt="Raddish" class="vegetable-image">
+                            <span class="vegetable-name">Raddish</span> 
+                        </div>
+                        <span class="vegetable-price">25.00 <span class="vegetable-unit">PHP</span></span>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+    </div>
+    </div>
+<footer class="rectangle-139">
+    <div class="footer-content-wrapper">
+        
+        <div class="footer-col footer-branding-col">
+            <div class="logo-area-footer">
+                <img class="social-responsibility-2" src="image/social-responsibility 1 (1).png" alt="Logo" />
+                <div class="baryo-tap2">BARYO TAP</div>
+            </div>
+            <div class="a-digit-barangay-service-portal-designed-requests-and-market-price-monitoring-faster-transparent-and-more-accessible-to-all-residents-of-mantalongon-dalaguete-cebu">
+                A digital barangay service portal designed requests, and market price monitoring faster, transparent, and more accessible to all residents of Mantalongon, Dalaguete, Cebu.
+            </div>
+        </div>
+
+        <div class="footer-col footer-explore-col">
+            <div class="explore">EXPLORE</div>
+            <div class="submit-report-complaint-request-barangay-documents-market-price-analytics-announcement-and-updates-resident-support-desk">
+                Submit Report / Complaint<br>
+                Request Barangay Documents<br>
+                Market Price Analytics<br>
+                Announcement and Updates<br>
+                Resident Support Desk
+            </div>
+        </div>
+
+        <div class="footer-col footer-services-col">
+            <div class="services">SERVICES</div>
+            <div class="indigency-certificate-request-barangay-clearance-request-business-permit-assistance-community-concern-tracking">
+                Indigency Certificate Request<br>
+                Barangay Clearance Request<br>
+                Business Permit Assistance<br>
+                Community Concern Tracking
+            </div>
+        </div>
+
+        <div class="footer-col footer-contact-col">
+            <div class="contact-us">CONTACT US</div>
+            <div class="contact-column">
+                <div class="contact-item contact-location">
+                    <img src="image/location (2) 1.png" alt="Location"> Mantalongon, Dalaguete, Cebu
+                </div>
+                <div class="contact-item contact-email">
+                    <img src="image/mail 1.png" alt="Email"> baryotap@gmail.com
+                </div>
+                <div class="contact-item contact-phone">
+                    <img src="image/telephone (1) 7.png" alt="Phone"> 09511312976
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</footer>
+
+
+    <script>
+    // Date Picker Logic and AJAX Fetching
+    document.addEventListener('DOMContentLoaded', () => {
+        // Initialize the date to November 28, 2025
+        let currentDate = new Date(2025, 10, 28); 
+        const currentDateDisplay = document.getElementById('currentDateDisplay');
+        const prevDayButton = document.getElementById('prevDay');
+        const nextDayButton = document.getElementById('nextDay');
+
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+        
+        // Helper function to format date as YYYY-MM-DD for the database
+        const formatDateForDB = (date) => {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        };
+
+        // Renders the date on the UI and triggers the price fetch
+        const renderDate = (date) => {
+            const day = date.getDate();
+            const month = monthNames[date.getMonth()];
+            const year = date.getFullYear();
+            currentDateDisplay.textContent = `${month} ${day}, ${year}`;
+            
+            // ⭐️ IMPORTANT: Fetch prices whenever the date changes
+            fetchPrices(formatDateForDB(date));
+        };
+
+        // ⭐️ FUNCTION: Fetches prices from the PHP script (fetch_prices.php)
+        const fetchPrices = (dbDate) => {
+            fetch(`fetch_prices.php?date=${dbDate}`)
+                .then(response => {
+                    // Check for HTTP errors (e.g., 400, 500)
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.error) {
+                        console.warn("No data for this date:", data.error);
+                        // alert(`No price data found for ${dbDate}.`); // Uncomment if you want an alert
+                        return;
+                    }
+                    
+                    // Update the HTML with the fetched prices
+                    updateVegetablePrices(data);
+                })
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                    // Alert the user if the server or PHP script is unreachable
+                    alert('Failed to connect to the database. Ensure XAMPP is running and the PHP file exists.');
+                });
+        };
+
+        // ⭐️ FUNCTION: Updates the prices in the HTML containers
+        const updateVegetablePrices = (priceData) => {
+            // Convert the array of price objects into a map for fast lookup
+            const priceMap = priceData.reduce((map, item) => {
+                // Ensure the vegetable name is consistent (e.g., trim whitespace)
+                map[item.vegetable_name.trim()] = parseFloat(item.price).toFixed(2);
+                return map;
+            }, {});
+
+            const vegetableItems = document.querySelectorAll('.vegetable-item');
+
+            vegetableItems.forEach(item => {
+                const nameElement = item.querySelector('.vegetable-name');
+                const priceElement = item.querySelector('.vegetable-price');
+                
+                // Get the vegetable name from the HTML element and trim it for consistency
+                const name = nameElement.textContent.trim();
+                
+                if (priceMap[name]) {
+                    // Update the price
+                    priceElement.innerHTML = `${priceMap[name]} <span class="vegetable-unit">PHP</span>`;
+                }
+            });
+        };
+
+        // Initial render and fetch upon page load (sets prices for Nov 28, 2025)
+        renderDate(currentDate);
+        
+        prevDayButton.addEventListener('click', () => {
+            // Decrement the date by one day
+            currentDate.setDate(currentDate.getDate() - 1);
+            renderDate(currentDate);
+        });
+
+        nextDayButton.addEventListener('click', () => {
+            // Increment the date by one day
+            currentDate.setDate(currentDate.getDate() + 1);
+            renderDate(currentDate);
+        });
+    });
+    </script>
+</body>
+</html>
