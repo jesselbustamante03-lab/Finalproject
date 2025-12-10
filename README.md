@@ -16,6 +16,7 @@ To run the Baryo Tap application, you need a local server environment such as XA
     -Directory Setup: Place the system folder inside your server root directory (e.g., htdocs/Finalproject/)
 
 Step-by-Step Usage Guide
+ 
   1. Server Initialization
 
       Open XAMPP Control Panel      
@@ -32,6 +33,7 @@ Confirm both modules are running (green indicator)
     This loads the official landing page of the system.
 
 3. Authentication Flow
+   
 | Step                | Interface          | Action / Required Input                                                                          |
 | --------------------| -------------------| -------------------------------------------------------------------------------------------------|
 | **Landing Page**    | N/A                | Explore the page, then click **Get Started**,**Sign In**, **Sign In**, or **Sign Up**            |
@@ -43,6 +45,7 @@ Confirm both modules are running (green indicator)
 4. Home Dashboard Interface
 
 When the user logs in successfully, the dashboard displays personalized content:
+
 *Personal Greeting
 
 *Quick Access Buttons
