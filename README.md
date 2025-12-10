@@ -34,7 +34,7 @@ Confirm both modules are running (green indicator)
 3. Authentication Flow
 | Step                | Interface         | Action / Required Input                                                                         |
 | ------------------- | ----------------- | ----------------------------------------------------------------------------------------------- |
-| **Landing Page**    | N/A               | Explore the page, then click **Get Started**,**Sign In**, **Sign In**, or **Sign Up**                       |
+| **Landing Page**    | N/A               | Explore the page, then click **Get Started**,**Sign In**, **Sign In**, or **Sign Up**           |
 | **Sign Up**         | Registration Form | Fill in all required information. Form validates email, password strength, and required fields. |
 | **Password Policy** | —                 | Must be 8+ characters with uppercase, number, and special character. Example: `Cheryl@123`      |
 | **Sign In**         | Login Form        | Enter registered **Email** and **Password**                                                     |
