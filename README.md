@@ -75,6 +75,15 @@ The Profile page allows users to:
     -Manage Account (validate)
 
 7. Logout
+   -To securely end your session:
+   -Locate the Logout button at the bottom of the sidebar
+   -Click Logout
+   -The system will:
+   -Terminate your current session
+   -Redirect you to the Login page
+
+
+You must sign in again to access the system
 Click the Logout button at the bottom of the sidebar to securely end the session and return to the Login page.
 
 👥 Meet the Team (Group 7)
